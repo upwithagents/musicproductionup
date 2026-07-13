@@ -12,7 +12,11 @@ export async function POST(request: Request) {
     referenceProfile?: string;
     notes?: string;
   } | null;
-  if (!body?.name?.trim() || !body.referenceProfile) {
+  if (
+    typeof body?.name !== "string" ||
+    !body.name.trim() ||
+    typeof body.referenceProfile !== "string"
+  ) {
     return NextResponse.json(
       { error: "name and referenceProfile are required" },
       { status: 400 },

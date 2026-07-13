@@ -36,6 +36,18 @@ describe("api routes", () => {
     expect(res.status).toBe(400);
   });
 
+  test("project create rejects non-string name without throwing", async () => {
+    const res = await projectsPost(
+      new Request("http://localhost/api/projects", {
+        method: "POST",
+        body: JSON.stringify({ name: 42, referenceProfile: "vocal-pop" }),
+      }),
+    );
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toBe("name and referenceProfile are required");
+  });
+
   test("track upload accepts multipart wav and starts analysis", async () => {
     const created = await projectsPost(
       new Request("http://localhost/api/projects", {

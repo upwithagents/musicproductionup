@@ -1,16 +1,12 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/core/db";
-import { generateAdvice } from "@/core/service";
+import { generateAdvice, listAdvice } from "@/core/service";
 
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-  const advice = await prisma.advice.findMany({
-    where: { trackId: id },
-    orderBy: { createdAt: "desc" },
-  });
+  const advice = await listAdvice(id);
   return NextResponse.json({ advice });
 }
 

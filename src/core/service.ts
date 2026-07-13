@@ -183,6 +183,13 @@ export async function generateAdvice(
   });
 }
 
+export function listAdvice(trackId: string) {
+  return prisma.advice.findMany({
+    where: { trackId },
+    orderBy: { createdAt: "desc" },
+  });
+}
+
 export interface ComparisonRow {
   key: string;
   label: string;
