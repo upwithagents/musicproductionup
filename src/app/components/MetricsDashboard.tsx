@@ -2,6 +2,7 @@ import type { AnalysisMetrics, BandId } from "@/core/types";
 import { BAND_DEFS } from "@/core/types";
 import type { ReferenceProfile } from "@/core/references/profiles";
 import type { Deviation } from "@/core/references/deviations";
+import { withBasePath } from "@/lib/base-path";
 
 function chipFor(metric: string, deviations: Deviation[]) {
   const d = deviations.find((x) => x.metric === metric);
@@ -89,7 +90,7 @@ export function MetricsDashboard({
         <div className="panel">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`/api/images?path=${encodeURIComponent(waveformPath)}`}
+            src={withBasePath(`/api/images?path=${encodeURIComponent(waveformPath)}`)}
             alt="Waveform"
             style={{ width: "100%", borderRadius: 6 }}
           />
@@ -99,7 +100,7 @@ export function MetricsDashboard({
         <div className="panel">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`/api/images?path=${encodeURIComponent(spectrogramPath)}`}
+            src={withBasePath(`/api/images?path=${encodeURIComponent(spectrogramPath)}`)}
             alt="Spectrogram"
             style={{ width: "100%", borderRadius: 6 }}
           />

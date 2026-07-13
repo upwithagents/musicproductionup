@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { withBasePath } from "@/lib/base-path";
 
 export function UploadForm({
   projectId,
@@ -21,7 +22,7 @@ export function UploadForm({
     setError(null);
     const form = new FormData();
     form.set("file", file);
-    const res = await fetch(`/api/projects/${projectId}/tracks`, {
+    const res = await fetch(withBasePath(`/api/projects/${projectId}/tracks`), {
       method: "POST",
       body: form,
     });

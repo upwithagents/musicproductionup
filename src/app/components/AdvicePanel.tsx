@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { AdviceStep } from "@/core/types";
+import { withBasePath } from "@/lib/base-path";
 
 interface AdviceEntry {
   id: string;
@@ -27,7 +28,7 @@ export function AdvicePanel({
     e.preventDefault();
     setBusy(true);
     setError(null);
-    const res = await fetch(`/api/tracks/${trackId}/advice`, {
+    const res = await fetch(withBasePath(`/api/tracks/${trackId}/advice`), {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ notes }),

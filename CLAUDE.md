@@ -34,6 +34,12 @@ the `upagent` core. Marketing is the sister project `musicmarketingup`.
 - External dependency: `ffmpeg`/`ffprobe` on PATH (Homebrew). The advisor
   needs `ANTHROPIC_API_KEY`; analysis works without it.
 - Run: `pnpm install && pnpm run db:push && pnpm run dev`. Tests:
-  `pnpm test`. Fixture playground: `npx tsx scripts/make-fixture.ts`.
+  `pnpm test`. Fixture playground: `npx tsx scripts/make-fixture.ts`. The
+  app is served under `basePath` `/musicproductionup` (see
+  `next.config.ts`) so it can be mounted as a zone in
+  `upwithagents-portal`; standalone dev is at
+  `http://localhost:3000/musicproductionup`. Client/server code must reach
+  `/api/*` and image URLs through `withBasePath()` from `@/lib/base-path`
+  — raw `fetch`/`<img src>` are not basePath-rewritten by Next.
 - Plans live in the workspace-level
   `1_CLAUDE_WORKFLOW/plans/musicproductionup/`, not in this repo.

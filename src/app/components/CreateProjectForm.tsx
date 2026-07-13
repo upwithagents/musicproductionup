@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { withBasePath } from "@/lib/base-path";
 
 export function CreateProjectForm({
   profiles,
@@ -18,7 +19,7 @@ export function CreateProjectForm({
     e.preventDefault();
     setBusy(true);
     setError(null);
-    const res = await fetch("/api/projects", {
+    const res = await fetch(withBasePath("/api/projects"), {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ name, referenceProfile: profile }),

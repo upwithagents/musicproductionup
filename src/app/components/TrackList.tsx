@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { withBasePath } from "@/lib/base-path";
 
 interface TrackRow {
   id: string;
@@ -26,7 +27,7 @@ export function TrackList({
     let stopped = false;
 
     async function load() {
-      const res = await fetch(`/api/projects/${projectId}`);
+      const res = await fetch(withBasePath(`/api/projects/${projectId}`));
       if (stopped) return;
       if (!res.ok) {
         setLoadError(true);
