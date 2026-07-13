@@ -11,8 +11,15 @@ interface TrackRow {
   analysis: { status: string; error: string | null } | null;
 }
 
-export function TrackList({ projectId }: { projectId: string }) {
+export function TrackList({
+  projectId,
+  refreshKey,
+}: {
+  projectId: string;
+  refreshKey: number;
+}) {
   const [tracks, setTracks] = useState<TrackRow[] | null>(null);
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined;
@@ -20,8 +27,13 @@ export function TrackList({ projectId }: { projectId: string }) {
 
     async function load() {
       const res = await fetch(`/api/projects/${projectId}`);
-      if (!res.ok || stopped) return;
+      if (stopped) return;
+      if (!res.ok) {
+        setLoadError(true);
+        return;
+      }
       const { project } = await res.json();
+      setLoadError(false);
       setTracks(project.tracks);
       if (
         project.tracks.some(
@@ -36,9 +48,12 @@ export function TrackList({ projectId }: { projectId: string }) {
       stopped = true;
       if (timer) clearTimeout(timer);
     };
-  }, [projectId]);
+  }, [projectId, refreshKey]);
 
-  if (!tracks) return <p className="muted">Loading…</p>;
+  if (!tracks) {
+    if (loadError) return <p className="muted">Couldn&apos;t load versions.</p>;
+    return <p className="muted">Loading…</p>;
+  }
   if (tracks.length === 0) {
     return <p className="muted">No versions uploaded yet.</p>;
   }

@@ -1,10 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
-export function UploadForm({ projectId }: { projectId: string }) {
-  const router = useRouter();
+export function UploadForm({
+  projectId,
+  onUploaded,
+}: {
+  projectId: string;
+  onUploaded: () => void;
+}) {
   const fileRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -23,11 +27,12 @@ export function UploadForm({ projectId }: { projectId: string }) {
     });
     setBusy(false);
     if (!res.ok) {
-      setError((await res.json()).error ?? "Upload failed");
+      const body = await res.json().catch(() => ({} as { error?: string }));
+      setError(body.error ?? "Upload failed");
       return;
     }
     if (fileRef.current) fileRef.current.value = "";
-    router.refresh();
+    onUploaded();
   }
 
   return (

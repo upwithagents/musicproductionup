@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import { getProjectDetail } from "@/core/service";
 import { getProfile } from "@/core/references/profiles";
-import { UploadForm } from "@/app/components/UploadForm";
-import { TrackList } from "@/app/components/TrackList";
+import { ProjectWorkspace } from "@/app/components/ProjectWorkspace";
 
 export const dynamic = "force-dynamic";
 
@@ -22,10 +21,7 @@ export default async function ProjectPage({
       <p className="muted">
         Reference: {profile.name} — {profile.description}
       </p>
-      <h2>Upload a new version</h2>
-      <UploadForm projectId={project.id} />
-      <h2>Versions</h2>
-      <TrackList projectId={project.id} />
+      <ProjectWorkspace projectId={project.id} />
     </>
   );
 }
