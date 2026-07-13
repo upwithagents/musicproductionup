@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Project {
+  id               String   @id @default(cuid())
+  name             String
+  referenceProfile String // ReferenceProfile id, e.g. "streaming-master"
+  notes            String   @default("")
+  createdAt        DateTime @default(now())
+  tracks           Track[]
+}
+
+model Track {
+  id           String    @id @default(cuid())
+  projectId    String
+  project      Project   @relation(fields: [projectId], references: [id])
+  version      Int // 1-based, per project
+  originalName String
+  filePath     String // under uploads/, absolute at runtime
+  format       String // wav | mp3
+  sizeBytes    Int
+  durationSec  Float     @default(0)
+  createdAt    DateTime  @default(now())
+  analysis     Analysis?
+  advice       Advice[]
+}
+
+model Analysis {
+  id              String    @id @default(cuid())
+  trackId         String    @unique
+  track           Track     @relation(fields: [trackId], references: [id])
+  status          String    @default("running") // running | completed | failed
+  error           String?
+  metrics         String? // JSON AnalysisMetrics
+  waveformPath    String?
+  spectrogramPath String?
+  createdAt       DateTime  @default(now())
+  completedAt     DateTime?
+}
+
+model Advice {
+  id        String   @id @default(cuid())
+  trackId   String
+  track     Track    @relation(fields: [trackId], references: [id])
+  notes     String   @default("") // user's stated goal/intent
+  model     String
+  steps     String // JSON AdviceStep[], ordered by priority
+  dropped   Int      @default(0) // schema-invalid steps dropped
+  createdAt DateTime @default(now())
+}
