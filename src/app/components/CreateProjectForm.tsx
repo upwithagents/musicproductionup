@@ -25,7 +25,8 @@ export function CreateProjectForm({
     });
     setBusy(false);
     if (!res.ok) {
-      setError((await res.json()).error ?? "Failed to create project");
+      const body = await res.json().catch(() => ({} as { error?: string }));
+      setError(body.error ?? "Failed to create project");
       return;
     }
     const { project } = await res.json();

@@ -55,7 +55,12 @@ function extractJsonArray(raw: string): unknown[] {
   if (start === -1 || end <= start) {
     throw new Error("Advisor response contained no JSON array");
   }
-  const parsed = JSON.parse(raw.slice(start, end + 1));
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw.slice(start, end + 1));
+  } catch {
+    throw new Error("Advisor response contained no JSON array");
+  }
   if (!Array.isArray(parsed)) {
     throw new Error("Advisor response contained no JSON array");
   }

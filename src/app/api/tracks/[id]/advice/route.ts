@@ -20,9 +20,9 @@ export async function POST(
     const advice = await generateAdvice(id, body.notes ?? "");
     return NextResponse.json({ advice }, { status: 201 });
   } catch (e) {
-    return NextResponse.json(
-      { error: e instanceof Error ? e.message : "advice failed" },
-      { status: 500 },
-    );
+    const message = e instanceof Error ? e.message : "advice failed";
+    const recoverable =
+      /analysis has not completed|ANTHROPIC_API_KEY/i.test(message);
+    return NextResponse.json({ error: message }, { status: recoverable ? 400 : 500 });
   }
 }

@@ -4,7 +4,7 @@ import path from "node:path";
 
 const FIXTURE_DIR = path.resolve(process.cwd(), "data/fixtures");
 
-const RECIPES: Record<string, string[]> = {
+const RECIPES = {
   // 3s mono-ish stereo test tones at 44.1k
   sine1k: ["-f", "lavfi", "-i", "sine=frequency=1000:duration=3", "-ac", "2", "-ar", "44100"],
   sine100: ["-f", "lavfi", "-i", "sine=frequency=100:duration=3", "-ac", "2", "-ar", "44100"],
@@ -29,7 +29,7 @@ const RECIPES: Record<string, string[]> = {
     "-af", "pan=stereo|c0=c0|c1=c0",
     "-ar", "44100"],
   mono: ["-f", "lavfi", "-i", "sine=frequency=440:duration=3", "-ac", "1", "-ar", "44100"],
-};
+} satisfies Record<string, string[]>;
 
 export type FixtureName = keyof typeof RECIPES | "notaudio";
 
