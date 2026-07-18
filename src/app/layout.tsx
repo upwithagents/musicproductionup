@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { PortalChrome } from "./components/PortalChrome";
 
 export const metadata: Metadata = {
   title: "MusicProductionUp",
@@ -14,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <PortalChrome />
         <main>
           <div className="row" style={{ justifyContent: "space-between" }}>
             <Link href="/" style={{ fontWeight: 700, fontSize: "1.05rem" }}>

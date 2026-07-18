@@ -1,3 +1,10 @@
+/* PortalHeader's theme, scoped to [data-portal-chrome] so it can't collide
+   with this app's own --bg/--text (etc.) tokens below. Its stylesheet
+   already imports tailwindcss. */
+@import "@upwithagents/ui/header-scope.css";
+/* Tailwind ignores node_modules by default; scan the UI package's classes. */
+@source "../../node_modules/@upwithagents/ui/dist";
+
 :root {
   --bg: #0b0d12;
   --panel: #141824;
