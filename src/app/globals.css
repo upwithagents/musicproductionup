@@ -1,8 +1,8 @@
 /* Full shared theme (paper/ink + terracotta accent) — musicproductionup
    adopts it app-wide, not just for the header. --good/--warn/--bad map
-   onto the shared success/accent-secondary/danger tokens so verdict
-   colors keep their meaning (green=good, amber=warn, red=bad) while
-   using the shared palette instead of bespoke hex. */
+   onto the shared success/warning/danger tokens so verdict colors keep
+   their meaning (green=good, amber=warn, red=bad) while using the shared
+   palette instead of bespoke hex. */
 @import "@upwithagents/ui/styles.css";
 /* Tailwind ignores node_modules by default; scan the UI package's classes. */
 @source "../../node_modules/@upwithagents/ui/dist";
@@ -14,7 +14,7 @@
   --muted-text: var(--muted-foreground);
   --accent: var(--color-accent);
   --good: var(--color-success);
-  --warn: var(--color-accent-secondary);
+  --warn: var(--color-warning);
   --bad: var(--color-danger);
 }
 
@@ -24,7 +24,6 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 main { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
