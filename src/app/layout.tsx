@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Archivo, Inter, IBM_Plex_Mono } from "next/font/google";
+import { ThemeScript } from "@upwithagents/ui";
 import "./globals.css";
 import { PortalChrome } from "./components/PortalChrome";
 
@@ -32,6 +33,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${archivo.variable} ${inter.variable} ${plexMono.variable}`}>
+      <head>
+        <ThemeScript />
+      </head>
       <body>
         <PortalChrome />
         <main>
