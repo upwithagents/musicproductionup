@@ -1,13 +1,13 @@
+<img src="docs/icon.svg" width="56" align="left" alt="" />
+
 # MusicProductionUp
 
-Music-production assistant for bands and singers: upload a mix render,
-get real DSP analysis (loudness, dynamics, spectral balance, stereo
-image) compared against a genre reference profile, and prioritized
-mixing/mastering steps generated from the measurements — never from the
-raw audio. Upload the next revision to see what improved.
+Upload a mix render, get real DSP analysis (loudness, dynamics, spectral
+balance, stereo image) against a genre reference, and prioritized
+mixing/mastering steps generated from the measurements. Part of the **up**
+ecosystem; sister project `musicmarketingup` handles marketing.
 
-Part of the up ecosystem (upagent, updiscord, upwithagents-portal).
-Sister project: musicmarketingup (marketing/promotion).
+<br clear="left"/>
 
 ## Requirements
 
@@ -26,5 +26,4 @@ Sister project: musicmarketingup (marketing/promotion).
 
 ## Privacy
 
-`uploads/` and `data/` are gitignored — your recordings and everything
-derived from them stay on your machine.
+`uploads/` and `data/` are gitignored — recordings stay on your machine.
