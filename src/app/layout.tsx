@@ -41,17 +41,18 @@ export default function RootLayout({
         <ThemeScript />
       </head>
       <body>
-        <PortalChrome />
-        <main>
-          <div className="row" style={{ justifyContent: "space-between" }}>
-            <Link href="/" style={{ fontWeight: 700, fontSize: "1.05rem" }}>
-              🎚️ MusicProductionUp
-            </Link>
-            <span className="muted">mix → measure → improve</span>
-          </div>
-          <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "1rem 0 2rem" }} />
-          {children}
-        </main>
+        <PortalChrome>
+          <main>
+            <div className="row" style={{ justifyContent: "space-between" }}>
+              <Link href="/" style={{ fontWeight: 700, fontSize: "1.05rem" }}>
+                🎚️ MusicProductionUp
+              </Link>
+              <span className="muted">mix → measure → improve</span>
+            </div>
+            <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "1rem 0 2rem" }} />
+            {children}
+          </main>
+        </PortalChrome>
       </body>
     </html>
   );
